@@ -1,0 +1,16 @@
+#ifndef MOUSE_ERROR
+#define MOUSE_ERROR
+
+typedef enum
+  {
+    MOUSE_ERROR_NONE,
+    MOUSE_ERROR_INITIALIZATION,
+    MOUSE_ERROR_MEMORY,
+    MOUSE_ERROR_RENDERER,
+    MOUSE_ERROR_TEXTURE,
+    MOUSE_ERROR_AUDIO,
+    MOUSE_ERROR_LOGIC,
+    MOUSE_ERROR_ENTITY,
+  } mouse_error_code;
+
+#endif

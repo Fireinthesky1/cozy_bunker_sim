@@ -1,0 +1,7 @@
+*~
+/build/*
+/tools/*
+/bin/*
+*.gdb_history
+/libraries/*
+/vendored/*
