@@ -1,0 +1,34 @@
+TODO:
+[X] Render a clear color
+[X] Render a texture
+[X] Render a character on the screen
+[X] fix build issue with the project
+[X] resolve linking error
+[X] downgrade to SDL2
+[X] resolve all errors
+[X] render the player on the screen using the entity component system
+[X] implement an entity component system
+[X] figure out naming conventions
+[X] decouple the game engine from SDL
+[X] fix storing the adress of a local variable rect in init renderable
+[ ] place all delcarations at the top of the function codebase wide
+[X] make it so you can exit the window
+[ ] Move the character using joystick
+[ ] figure out order of operations for cleanup
+[ ] figure out what to do with the functions that utelize SDL
+[ ] implement a logger
+
+BUGS:
+[ ] resizable window glitching
+
+NOTES:
+ - I want the game engine as decoupled as possible from SDL. This way I
+   can reuse the engine for later projects and not have to rewrite the engine
+
+ - We will use a polling implementation and poll inputs at the beggining of each game loop
+   cycle
+
+ - How will we retrieve inputs?
+   - SDL
+ - How will we process inputs?
+   - event sytem ( I want to run this game single threaded )

@@ -1,31 +1,3 @@
-/*
-TODO:
-[X] Render a clear color
-[X] Render a texture
-[X] Render a character on the screen
-[X] fix build issue with the project
-[X] resolve linking error
-[X] downgrade to SDL2
-[X] resolve all errors
-[X] render the player on the screen using the entity component system
-[X] implement an entity component system
-[X] figure out naming conventions
-[X] decouple the game engine from SDL
-[X] fix storing the adress of a local variable rect in init renderable
-[ ] Move the character using joystick
-[ ] make it so you can exit the window
-[ ] figure out what to do with the functions that utelize SDL
-[ ] implement a logger
-
-BUGS:
-[ ] resizable window glitching
-
-NOTES:
- - I want the game engine as decoupled as possible from SDL. This way I
-   can reuse the engine for later projects and not have to rewrite the engine
-
-*/
-
 #include <SDL.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -51,6 +23,7 @@ uint32_t num_entities = 0;
 /* loads the spritesheet so SDL can use it */
 mouse_error_code load_global_spritesheet(const char * bmp_name)
 {
+
   mouse_error_code result;
   SDL_Surface * surface;
   char * spritesheet_path;
@@ -98,7 +71,6 @@ mouse_error_code init(void)
     }
 
   // create window and renderer
-  // NOTE: careful here will a return of -1 enter the function?
   if(SDL_CreateWindowAndRenderer(WINDOW_WIDTH,
 				  WINDOW_HEIGHT,
 				  SDL_WINDOW_RESIZABLE,
@@ -179,17 +151,31 @@ int main(void)
   // game loop
   while(game_running)
     {
-      // update game logic
+      SDL_Event event;
+      while (SDL_PollEvent(&event)) {  // poll until all events are handled!
+	switch(event.type)
+	  {
+	  case SDL_QUIT:
+	    game_running = false;
+	    break;
+	  default:
+	    // do nothing
+	    break;
+	  }
 
-      // update sound
+      }
 
-      // pump error messages
+      // process hardware events and send them to game logic event queue
+
+      // update game logic using game logic event queue
 
       // render
       render(&cl.renderable_components[Player]);
     }
 
   // cleanup
+  // TODO: order of operations on cleanup
+  SDL_DestroyWindow(window);
   SDL_DestroyTexture(texture);
   SDL_Quit();
 
