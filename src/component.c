@@ -45,10 +45,12 @@ entity_id_t create_entity(component_lists_t * comp_list,
 
 }
 
+//TODO: implement
 void destroy_entity(component_lists_t * components, entity_id_t id)
 {
 }
 
+//TODO: implement
 void init_location_component(component_lists_t * components,
 			     entity_id_t id,
 			     int32_t x, int32_t y)
@@ -59,6 +61,7 @@ void init_location_component(component_lists_t * components,
 
 }
 
+//TODO: implement
 void init_velocity_component(component_lists_t * components,
 			     entity_id_t id,
 			     int32_t x, int32_t y)
@@ -69,6 +72,7 @@ void init_velocity_component(component_lists_t * components,
 
 }
 
+//TODO: no need for mouse_error_code return; no way for this to fail
 mouse_error_code init_renderable_component(component_lists_t * components,
 					   entity_id_t id,
 					   int32_t src_x, int32_t src_y,
@@ -108,16 +112,19 @@ mouse_error_code init_renderable_component(component_lists_t * components,
 }
 
 /* Each system is updated using the below functions */
+//TODO: implement
 void update_location_system(location_t * l, component_lists_t * components)
 {
 
 }
 
+//TODO: implement
 void update_velocity_system(velocity_t * v, component_lists_t * components)
 {
 
 }
 
+//TODO: implement
 void update_renderable_system(renderable_t * r, component_lists_t * components)
 {
 

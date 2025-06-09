@@ -11,8 +11,14 @@ TODO:
 [X] figure out naming conventions
 [X] decouple the game engine from SDL
 [X] fix storing the adress of a local variable rect in init renderable
-[ ] place all delcarations at the top of the function codebase wide
+[X] implement getting time in milliseconds, microseconds, seconds, minutes
 [X] make it so you can exit the window
+[ ] implement debug macros
+[ ] ensure cross compatability for mouse_time
+[ ] enforce target fps and develop game loop
+[ ] clean up the game loop
+[ ] place all delcarations at the top of the function codebase wide
+[ ] fix ' collect2: error: ld returned 1 exit status '
 [ ] Move the character using joystick
 [ ] figure out order of operations for cleanup
 [ ] figure out what to do with the functions that utelize SDL

@@ -5,6 +5,7 @@
 
 #include "component.h"
 #include "mouse_error.h"
+#include "mouse_time.h"
 
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
@@ -90,7 +91,6 @@ mouse_error_code init(void)
 }
 
 // this function renders things passed to it
-// TODO: figure out what this takes as an argument
 mouse_error_code render(renderable_t *r)
 {
   mouse_error_code result;
@@ -129,6 +129,14 @@ mouse_error_code update_game_logic(void)
 int main(void)
 {
 
+  component_mask_t components;
+  entity_id_t Player;
+  SDL_Event event;
+  mouse_time_t prev_mouse_time;
+  mouse_time_t cur_mouse_time;
+  mouse_time_t elapsed_mouse_time;
+  mouse_time_t lag;
+
 
   if(init() == MOUSE_ERROR_NONE)
     {
@@ -137,22 +145,34 @@ int main(void)
     }
 
   // starts a new frame with a black screen
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderClear(renderer);
 
   // create a player entity
-  component_mask_t components = LOCATION_COMP_MSK | RENDERABLE_COMP_MSK;
-  entity_id_t Player = create_entity(&cl, &components);
+  components = LOCATION_COMP_MSK | RENDERABLE_COMP_MSK;
+  Player = create_entity(&cl, &components);
   init_renderable_component(&cl, Player, 0, 0, 64, 64, 100, 100, 64, 64, 0);
 
   // show the window
   SDL_ShowWindow(window);
 
   // game loop
+  // 0 check the dela time
+  // 1 process input
+  // 2 update game state
+  // 3 render the game
+  prev_mouse_time = mouse_get_time(MOUSE_MILLISECONDS);
   while(game_running)
     {
-      SDL_Event event;
-      while (SDL_PollEvent(&event)) {  // poll until all events are handled!
+
+      cur_mouse_time = mouse_get_time(MOUSE_MILLISECONDS);
+      elapsed_mouse_time = cur_mouse_time - prev_mouse_time;
+      SDL_Log("Elapsed time is: %f\n", elapsed_mouse_time);
+      prev_mouse_time = cur_mouse_time;
+      lag += elapsed_mouse_time;
+
+      /* add hardware events to the game logic events queue */
+      while (SDL_PollEvent(&event)) {  /* poll until all events are handled! */
 	switch(event.type)
 	  {
 	  case SDL_QUIT:
@@ -165,12 +185,19 @@ int main(void)
 
       }
 
-      // process hardware events and send them to game logic event queue
+      /* update the game logic until we catch up */
+      while(lag >= MS_PER_UPDATE)
+	{
+	  /* update game logic */
 
-      // update game logic using game logic event queue
+	  lag -= MS_PER_UPDATE;
+	}
 
-      // render
+      /* render */
+      /* TODO: fix render() to render all renderables in component list */
+      /* we want to be able to pass in lag / MS_PER_UPDATE */
       render(&cl.renderable_components[Player]);
+
     }
 
   // cleanup
