@@ -72,7 +72,8 @@ void init_velocity_component(component_lists_t * components,
 
 }
 
-//TODO: no need for mouse_error_code return; no way for this to fail
+/* TODO: no need for mouse_error_code return; no way for this to fail */
+/* TODO: need to figure out how location works into screen coordinates */
 mouse_error_code init_renderable_component(component_lists_t * components,
 					   entity_id_t id,
 					   int32_t src_x, int32_t src_y,
@@ -111,11 +112,16 @@ mouse_error_code init_renderable_component(component_lists_t * components,
 
 }
 
-/* Each system is updated using the below functions */
-//TODO: implement
+/* The update call to update every system */
+void update_systems(component_lists_t * components)
+{
+  /* clear the input queue and update each system accordingly  */
+
+}
+
+/* TODO(HICKS): implement */
 void update_location_system(location_t * l, component_lists_t * components)
 {
-
 }
 
 //TODO: implement
@@ -125,6 +131,8 @@ void update_velocity_system(velocity_t * v, component_lists_t * components)
 }
 
 //TODO: implement
+/* NOTE: will updates to the location system update the target rectangle for the renderable component? */
+/* I don't like the idea of having them coupled but perhaps they need to be */
 void update_renderable_system(renderable_t * r, component_lists_t * components)
 {
 

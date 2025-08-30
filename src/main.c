@@ -137,7 +137,6 @@ int main(void)
   mouse_time_t elapsed_mouse_time;
   mouse_time_t lag;
 
-
   if(init() == MOUSE_ERROR_NONE)
     {
       SDL_Log("game Initialized...\n");
@@ -167,14 +166,36 @@ int main(void)
 
       cur_mouse_time = mouse_get_time(MOUSE_MILLISECONDS);
       elapsed_mouse_time = cur_mouse_time - prev_mouse_time;
-      SDL_Log("Elapsed time is: %f\n", elapsed_mouse_time);
+      //SDL_Log("Elapsed time is: %f\n", elapsed_mouse_time);
       prev_mouse_time = cur_mouse_time;
       lag += elapsed_mouse_time;
 
-      /* add hardware events to the game logic events queue */
+      /* TODO: MOVEMENT TESTING CODE. REFACTOR!!! */
       while (SDL_PollEvent(&event)) {  /* poll until all events are handled! */
 	switch(event.type)
 	  {
+	  case SDL_KEYDOWN:
+	    if(event.key.keysym.sym == SDLK_w)
+	      {
+		/* move the player up */
+		cl.renderable_components[Player].dst_rect.y -= 10;
+	      }
+	    else if(event.key.keysym.sym == SDLK_a)
+	      {
+		/* move the player to the left*/
+		cl.renderable_components[Player].dst_rect.x -= 10;
+	      }
+	    else if(event.key.keysym.sym == SDLK_s)
+	      {
+		/* move the player to the down */
+		cl.renderable_components[Player].dst_rect.y += 10;
+	      }
+	    else if(event.key.keysym.sym == SDLK_d)
+	      {
+		/* move the player to the right */
+		cl.renderable_components[Player].dst_rect.x += 10;
+	      }
+	    break;
 	  case SDL_QUIT:
 	    game_running = false;
 	    break;
@@ -189,13 +210,13 @@ int main(void)
       while(lag >= MS_PER_UPDATE)
 	{
 	  /* update game logic */
-
 	  lag -= MS_PER_UPDATE;
 	}
 
       /* render */
       /* TODO: fix render() to render all renderables in component list */
       /* we want to be able to pass in lag / MS_PER_UPDATE */
+      SDL_RenderClear(renderer);
       render(&cl.renderable_components[Player]);
 
     }

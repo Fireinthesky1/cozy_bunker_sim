@@ -90,6 +90,7 @@ mouse_error_code init_renderable_component(component_lists_t * components,
 					   uint32_t layer);
 
 /* Each system is updated using the below functions */
+void update_systems(component_lists_t * components);
 void update_location_system(location_t * l, component_lists_t * components);
 void update_velocity_system(location_t * v, component_lists_t * components);
 void update_renderable_system(renderable_t * r, component_lists_t * components);

@@ -13,7 +13,15 @@ TODO:
 [X] fix storing the adress of a local variable rect in init renderable
 [X] implement getting time in milliseconds, microseconds, seconds, minutes
 [X] make it so you can exit the window
-[ ] implement debug macros
+
+[x] create docs for the component module
+    - FINISH THIS
+[ ] implement and test the component module
+  [ ] update locaation system
+
+[ ] get the character moving around the screen
+[ ] consider rearchitecture so everything is done with 'state machines'
+[ ] implement debug macros (WDIM?)
 [ ] ensure cross compatability for mouse_time
 [ ] enforce target fps and develop game loop
 [ ] clean up the game loop

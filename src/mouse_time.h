@@ -8,7 +8,6 @@
 #include <stdint.h>
 #include <time.h>
 
-
 // TODO: figure out if it's bad form to #define multiple things to one number
 #define NSEC_PER_USEC 1000
 #define NSEC_PER_MSEC 1000000
