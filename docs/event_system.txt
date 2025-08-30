@@ -1,0 +1,11 @@
+The Problem we want to solve:
+    - We want to decouple the recieving of user input from the time that the user
+      input is processed. So that we can asynchronously receive player input
+      and deal with player input in chunks when we need to.
+    - No blocking to get input ever
+
+Architecture
+ 1) get all hardware events and process most critical events
+    - CRITICAL EVENTS: quitting the game
+ 2) as we get those events place them in the event queue
+ 3) every call to update will process all of the events

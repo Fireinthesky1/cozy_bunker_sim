@@ -1,0 +1,17 @@
+How do we get user input?
+    - SDL hardware events tell us what button was pressed / joystick was pressed
+How do we perform work on this input?
+    - we feed these inputs into a queue which feeds a finite state machine to decide
+      what the character does
+How is the player movement modeled?
+    - a finite state machine
+
+Event_Queue
+	- INPUT UP
+	- INPUT DOWN
+	- INPUT LEFT
+	- INPUT RIGHT
+	- INPUT ATTACK
+	- INPUT OPEN
+	- INPUT OPEN INVENTORY
+	- INPUT OPEN MAP

@@ -1,0 +1,45 @@
+* Component Specification Sheet
+** Author: James Hicks
+** Date Created: [2025-08-29 Fri]
+** Date Last Modified: [2025-08-29 Fri]
+*** Modification notes
+Creation of document
+
+* Entity Component System
+Comprised of /entities/ composed of /components/ with /systems/
+which operate on the components.
+
+* Entities
+Represents a general purpose object. It consists of a unique ID and a bit mask
+indicating which components are attached to that ID. This ID is also used as
+an index for indexing into component arrays.
+
+* Components
+A component charactarizes an entity as possessing a particular aspect. These
+components can be 'attached' to each entity using the respective entities'
+bit mask.
+
+* Systems
+A system is a process which acts on /all/ entities with the desired components.
+For example the renderer iterates over all the entities with the 'renderable'
+component attached to them and renders them to the screen.
+
+* entity_t
+The entity type is composed of a 32-bit ID and a component mask
+** entity ID
+The entity ID is the index into the global entity array unique to each entity.
+This ID can be used to index into the global entity array and access the entity.
+** component mask
+The component mask is a bit field that indicates which components are active on
+the entity.
+
+* component_bit_t
+An enumeration of bit masks used to indicate which components are active on an
+entity. For example; (LOCATION_COMP_MSK & e.comp_sel) != 0 is true when the
+location component is active on the given entity e.
+
+* component_lists_t
+This struct holds a list for every available component. I.E it is possible
+for every entity to have an instance of every component.
+The total number each component type are kept track of in order to facilitate
+appending to the end of the component lists.

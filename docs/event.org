@@ -1,0 +1,19 @@
+* Event Messaging System Specification Sheet
+** Author: James Hicks
+** Date Created: [2025-08-29 Fri]
+** Date Last Modified: [2025-08-29 Fri]
+*** Modification notes
+- Creation of document [2025-08-29 Fri]
+
+* Purpose of the EMS
+User input can come into the game unpredictably. Rather than busy-waiting for
+input to come in we want to implement an [[https://en.wikipedia.org/wiki/Observer_pattern][observer pattern]]. Our implementation
+will be asynchronous. I.E. The time that the event is registered is temporally
+decoupled from the time the event is processed. For this decoupling we utilize
+an event queue.
+
+* Observer
+
+* Event Queue
+
+* Asynchronous Event Processing
