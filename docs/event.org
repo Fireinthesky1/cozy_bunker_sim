@@ -7,13 +7,21 @@
 
 * Purpose of the EMS
 User input can come into the game unpredictably. Rather than busy-waiting for
-input to come in we want to implement an [[https://en.wikipedia.org/wiki/Observer_pattern][observer pattern]]. Our implementation
+input to come in we want to implement a publisher subscriber. Our implementation
 will be asynchronous. I.E. The time that the event is registered is temporally
 decoupled from the time the event is processed. For this decoupling we utilize
 an event queue.
 
-* Observer
+* Publisher
+Events are asynchronously published to an event queue.
+
+* Subscribers
+Subscribing the an event type allows the user to process events out
+of the event queue with the /event type/.
+
 
 * Event Queue
 
 * Asynchronous Event Processing
+
+* The event loop
