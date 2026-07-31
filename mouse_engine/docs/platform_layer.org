@@ -1,0 +1,44 @@
+Documentation for the platform abstraction layer.
+Copyright (C) <2026>  <James Hicks>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+* platform abstraction layer (PAL) documentation
+The purpose of this system is to decouple the mouse_engine from the platform
+it's running on. This means that the mouse_engine has no concept of the the
+Linux, Mac, or Windows operating systems but simply passes it's calls to
+/this/ layer which does. The current iteration of the engine targets Linux.
+But future iterations may target Mac or Windows. We are building the infrastructure
+to be able to do.
+* platform.h
+This module will be responsible for platform detection.
+This is done by compiler
+* Windowing
+** Linux
+This module will be responsible for linux specific windowing calls.
+*** The X Windowing System
+**** What is the X Server?
+**** Opening A connection to X Server
+**** Displaying an X window
+**** Swapping buffer
+**** Even Polling
+**** Destroying an X window
+**** What is an InputOutput window?
+These kinds of windows are used for both displaying and for accepting inputs.
+Example of inputs are clicks on the screen etc. Because we want the use to
+be able to interact with the window, the main mouse_game window will be InputOutput.
+* Logging
+* Input
+* Memory Allocation
+* Networking
+* Audio

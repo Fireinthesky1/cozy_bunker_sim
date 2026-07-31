@@ -3,8 +3,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "../include/window.h"
-#include "../include/component.h"
+#include "../include/mouse_window.h"
+#include "../include/mouse_component.h"
 #include "../include/mouse_error.h"
 #include "../include/mouse_time.h"
 
@@ -13,9 +13,7 @@
 
 bool game_running = false;
 
-static SDL_Window   * window;      // The window for the entire game
-static SDL_Renderer * renderer;    // The renderer for the entire game
-static SDL_Texture  * texture;     // The sprite map for the entire game
+static mouse_window_t * window;    // The window for the entire game
 static component_lists_t cl = {0}; // Components list for the scope of the game
 
 // fully global
@@ -73,10 +71,10 @@ mouse_error_code init(void)
 
   // create window and renderer
   if(SDL_CreateWindowAndRenderer(WINDOW_WIDTH,
-				  WINDOW_HEIGHT,
-				  SDL_WINDOW_RESIZABLE,
-				  &window,
-				  &renderer) == -1)
+                                 WINDOW_HEIGHT,
+                                 SDL_WINDOW_RESIZABLE,
+                                 &window,
+                                 &renderer) == -1)
     {
       SDL_Log("Failed to initialize Window and Renderer: %s", SDL_GetError());
       result = MOUSE_ERROR_RENDERER;
@@ -99,8 +97,8 @@ mouse_error_code render(renderable_t *r)
 
   // just want to draw a mouse here
   SDL_RenderCopy(renderer, texture,
-		 (SDL_Rect *)&(r->src_rect),
-		 (SDL_Rect *)&(r->dst_rect));
+                 (SDL_Rect *)&(r->src_rect),
+                 (SDL_Rect *)&(r->dst_rect));
 
   SDL_RenderPresent(renderer);
 
@@ -172,37 +170,37 @@ int main(void)
 
       /* TODO: MOVEMENT TESTING CODE. REFACTOR!!! */
       while (SDL_PollEvent(&event)) {  /* poll until all events are handled! */
-	switch(event.type)
-	  {
-	  case SDL_KEYDOWN:
-	    if(event.key.keysym.sym == SDLK_w)
-	      {
-		/* move the player up */
-		cl.renderable_components[Player].dst_rect.y -= 10;
-	      }
-	    else if(event.key.keysym.sym == SDLK_a)
-	      {
-		/* move the player to the left*/
-		cl.renderable_components[Player].dst_rect.x -= 10;
-	      }
-	    else if(event.key.keysym.sym == SDLK_s)
-	      {
-		/* move the player to the down */
-		cl.renderable_components[Player].dst_rect.y += 10;
-	      }
-	    else if(event.key.keysym.sym == SDLK_d)
-	      {
-		/* move the player to the right */
-		cl.renderable_components[Player].dst_rect.x += 10;
-	      }
-	    break;
-	  case SDL_QUIT:
-	    game_running = false;
-	    break;
-	  default:
-	    // do nothing
-	    break;
-	  }
+        switch(event.type)
+          {
+          case SDL_KEYDOWN:
+            if(event.key.keysym.sym == SDLK_w)
+              {
+                /* move the player up */
+                cl.renderable_components[Player].dst_rect.y -= 10;
+              }
+            else if(event.key.keysym.sym == SDLK_a)
+              {
+                /* move the player to the left*/
+                cl.renderable_components[Player].dst_rect.x -= 10;
+              }
+            else if(event.key.keysym.sym == SDLK_s)
+              {
+                /* move the player to the down */
+                cl.renderable_components[Player].dst_rect.y += 10;
+              }
+            else if(event.key.keysym.sym == SDLK_d)
+              {
+                /* move the player to the right */
+                cl.renderable_components[Player].dst_rect.x += 10;
+              }
+            break;
+          case SDL_QUIT:
+            game_running = false;
+            break;
+          default:
+            // do nothing
+            break;
+          }
 
       }
 

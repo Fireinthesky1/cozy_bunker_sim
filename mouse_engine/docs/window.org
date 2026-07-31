@@ -1,0 +1,31 @@
+Documentation for the Mouse Windowing System.
+Copyright (C) <2026>  <James Hicks>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+* window documentation
+
+* Mouse Windowing System
+The Mouse Windowing System is decoupled from platform dependent windowing systems/
+
+** /mouse_window_platform_callbacks_t/
+The Mouse Windowing System contains a struct of platform callbacks called
+/mouse_window_platform_callbacks_t/. The purpose of this struct is the
+be the point where the mouse_engine windowing code meets the platform dependent
+windowing code. Each platform targeted by the mouse_engine must implement each
+of these functions. Each of these platform dependent functions must translate their
+windowing specific returns such as errors and events into /mouse_error_t/ and
+/mouse_event_t/. NO PLATFORM DEPENDENT TYPES SHALL PROPAGATE PAST THIS POINT! Everything
+shall be translated into type and events that are mouse_engine specific.
+
+** mouse_window_t struct
