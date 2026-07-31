@@ -13,10 +13,10 @@
 bool game_running = false;
 
 // local global
-static SDL_Window * window; // the window for the entire game
-static SDL_Renderer * renderer; // the renderer for the entire game
-static SDL_Texture * texture; // the sprite map for the entire game
-static component_lists_t cl = {0}; // components list for the scope of the game
+static SDL_Window   * window;      // The window for the entire game
+static SDL_Renderer * renderer;    // The renderer for the entire game
+static SDL_Texture  * texture;     // The sprite map for the entire game
+static component_lists_t cl = {0}; // Components list for the scope of the game
 
 // fully global
 uint32_t num_entities = 0;

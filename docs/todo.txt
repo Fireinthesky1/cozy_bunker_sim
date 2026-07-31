@@ -1,21 +1,10 @@
 TODO:
-[X] Render a clear color
-[X] Render a texture
-[X] Render a character on the screen
-[X] fix build issue with the project
-[X] resolve linking error
-[X] downgrade to SDL2
-[X] resolve all errors
-[X] render the player on the screen using the entity component system
-[X] implement an entity component system
-[X] figure out naming conventions
-[X] decouple the game engine from SDL
-[X] fix storing the adress of a local variable rect in init renderable
-[X] implement getting time in milliseconds, microseconds, seconds, minutes
-[X] make it so you can exit the window
-
-[x] create docs for the component module
-    - FINISH THIS
+[ ] Remove all SDL windowing code
+[ ] Create windowing docs
+[ ] Create windowing code
+[ ] Open a window on linux
+[ ] Make the window reseable
+[ ] Render everything using the processor
 [ ] implement and test the component module
   [ ] update locaation system
 
