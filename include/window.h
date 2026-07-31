@@ -22,5 +22,4 @@ extern Display * x_server_connection;
 /* Mouse Windowing System functions */
 extern void open_connection_to_x_server(void);
 
-
 #endif

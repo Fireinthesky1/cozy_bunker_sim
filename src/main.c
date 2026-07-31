@@ -3,16 +3,16 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "component.h"
-#include "mouse_error.h"
-#include "mouse_time.h"
+#include "../include/window.h"
+#include "../include/component.h"
+#include "../include/mouse_error.h"
+#include "../include/mouse_time.h"
 
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 
 bool game_running = false;
 
-// local global
 static SDL_Window   * window;      // The window for the entire game
 static SDL_Renderer * renderer;    // The renderer for the entire game
 static SDL_Texture  * texture;     // The sprite map for the entire game

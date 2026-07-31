@@ -1,12 +1,29 @@
+#  Documentation for the Mouse Windowing System.
+#  Copyright (C) <2026>  <James Hicks>
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 CC = gcc
 TARGET = $(BIN_DIR)/mouse_quest
 
 # get the sdl flags from sdl2-config
-CFLAGS = -Wall -Wextra -g -I/usr/include/SDL2 -D_REENTRANT
+CFLAGS = -Wall -Wextra -g -Iinclude -I/usr/include/SDL2 -D_REENTRANT
 LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lSDL2
 
 # directories
 SRC_DIR   =   src
+HDR_DIR   =   include
 LIB_DIR   =   libs
 BUILD_DIR =   build
 BIN_DIR   =   bin
@@ -14,7 +31,7 @@ DEBUG_DIR =   debug
 
 # source header and object files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
-HDR_FILES = $(wildcard $(SRC_DIR)/*.h)
+HDR_FILES = $(wildcard $(HDR_DIR)/*.h)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC_FILES))
 
 # default target
@@ -40,7 +57,7 @@ debug: all
 # build rules
 $(TARGET): $(OBJ_FILES)
 	@echo "building $@"
-	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
+	@$(CC) $(CFLAGS) -o $@ $^ $(LIBS) $(LDFLAGS)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(HDR_FILES)
 	@echo "Compiling $<"

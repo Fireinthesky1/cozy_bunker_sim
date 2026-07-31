@@ -1,4 +1,4 @@
-#include "mouse_time.h"
+#include "../include/mouse_time.h"
 
 // TODO: Test this function
 mouse_time_t mouse_get_time(mouse_time_sel_t unit_select)

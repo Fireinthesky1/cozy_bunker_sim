@@ -13,7 +13,7 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#include "component.h"
+#include "../include/component.h"
 
 extern uint32_t num_entities;
 
@@ -36,7 +36,7 @@ entity_id_t create_entity(component_lists_t * comp_list,
 
   if(num_entities > ENTITY_MAX)
     {
-      SDL_Log("Over entity limit\n");
+      SDL_Log("Error over the entity limit");
     }
 
   // initialize selected components based on comp_sel
