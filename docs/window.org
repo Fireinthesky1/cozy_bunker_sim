@@ -16,7 +16,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 * window documentation
 
 * Mouse Windowing System
-The Mouse Windowing System is decoupled from platform dependent windowing systems/
+The Mouse Windowing System is decoupled from platform dependent windowing systems.
+The Mouse Windowing System provides a clean interface
 
 ** /mouse_window_platform_callbacks_t/
 The Mouse Windowing System contains a struct of platform callbacks called

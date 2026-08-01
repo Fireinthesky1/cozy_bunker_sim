@@ -1,0 +1,33 @@
+Documentation for the Mouse Engine Host.
+Copyright (C) <2026>  <James Hicks>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+* Responsibilities of the of the host
+The host is responsible for bootstrapping and managing the runtime. This means:
+1. The host is responsible for managing the platform layer
+   a. The host is responsible for windowing.
+   b. The host is responsible for input.
+   c. The host is reposnsible for time.
+2. The host is responsible for managing modules.
+   a. Loading engine modules.
+   b. Loading the game module.
+   b. Hotswapping modules during runtime.
+4. The host is responsible for managing memory.
+5. The host owns the main loop.
+
+* Initialization
+1. The host bootstraps the platform
+2. The host loads engine modules.
+3. The host loads the game module.

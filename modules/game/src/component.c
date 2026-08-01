@@ -1,4 +1,4 @@
-//  Documentation for the Mouse Windowing System.
+//  Implementation of the entity component system for Mouse Game.
 //  Copyright (C) <2026>  <James Hicks>
 //
 //  This program is free software: you can redistribute it and/or modify

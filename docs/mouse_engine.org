@@ -1,0 +1,87 @@
+Documentation for Mouse Engine architecture, principles, terms.
+Copyright (C) <2026>  <James Hicks>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+* Glossary
+Host:          The executable responsible for bootstrapping and managing the runtime.
+Module:        A dynamically loaded shared library that provides functionality.
+Engine Module: A module that provides engine functionality (rendering, audio etc.)
+Game Module:   The module the provides the Game (i.e. Mouse Game).
+
+* Rules of the architecture
+1. Modules communicate through stable interfaces.
+2. The host owns all persistant data (i.e. the data that must survive reloading a module).
+3. Dependencies point toward the host.
+
+* Engine Architecture
+Mouse Engine is broken up into a host, and modules. The host is the main
+executable and modules are implemented as dynamic libraries. Modules are loaded
+in to the host. They can be swapped in and out during run time.
+
+** Engine Architecture
+
+*** Architectural Diagram
++----------------+
+|  Game Module   |
++----------------+
+        |
++----------------+
+| Engine Modules |
++----------------+
+        |
++----------------+
+|  Engine Host   |
++----------------+
+
+*** What is a module?
+A module is a dynamically loaded shared library that implements a stable interface.
+Modules do not communicate directly to one another, instead they interact through
+APIs provided by the host.
+
+*** What is the host?
+The host owns the lifetime of modules. The host owns all runtime state that must
+survive modules being reloaded.
+
+*** Engine Host Layer (bottom layer)
+The engine host is the main executable. I.e. it owns the main loop. It is responsible
+for platform specific code (windowing, input, time), managing modules, logging,
+managing memory, and it owns the main loop.
+
+1. Platform
+   a. Windowing
+   b. Input
+   c. Time
+2. Module manager
+3. Logger
+4. Memory manager
+5. Main loop
+
+*** Engine Module Layer (middle layer)
+Every major subsystem in Mouse Engine is implemented as a "module". Modules are
+designed to be loaded during run time. Modules are implemented as dynamic libraries
+(.so or .dll). Modules communicate through well defined and stable interfaces.
+Engine Modules are loaded to the engine.
+
+1. Renderer
+2. Audio
+3. Physics
+4. Asset System
+5. Networking
+6. UI
+
+*** Game Module Layer (top layer)
+The game itself (Mouse Game) is a module, and as such it is loaded into
+the Mouse Engine Host. Mouse Game, like the other modules, is loaded during
+run time and is thus hot-swappable.

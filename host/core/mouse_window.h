@@ -29,6 +29,7 @@ typedef struct
 } mouse_window_stats_t;
 
 /*
+The below struct is the Mouse Engine Window interface.
 platform_window_init:        Initializes the platform dependent windowing system
 platform_window_shutdown:    Shuts down the platform dependent windowing system
 platform_window_create:      Creates a platform dependent window
@@ -44,7 +45,7 @@ typedef struct
   mouse_error_t (*platform_window_destroy)(void);
   mouse_error_t (*platform_window_poll_events)(void);
   mouse_error_t (*platform_window_swap_buffers)(void);
-} mouse_window_platform_callbacks_t;
+} mouse_window_t;
 
 /* Mouse Windowing System variables */
 extern mouse_window_t * window;

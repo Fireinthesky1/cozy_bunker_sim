@@ -1,4 +1,4 @@
-#  Documentation for the Mouse Windowing System.
+#  Makefile for both Mouse Engine and Mouse Game.
 #  Copyright (C) <2026>  <James Hicks>
 #
 #  This program is free software: you can redistribute it and/or modify
