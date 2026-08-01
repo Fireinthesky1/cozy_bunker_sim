@@ -1,4 +1,4 @@
-#  Makefile for both Mouse Engine
+#  Main config.mk file for Mouse Engine
 #  Copyright (C) <2026>  <James Hicks>
 #
 #  This program is free software: you can redistribute it and/or modify
@@ -14,17 +14,26 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Every module in Mouse Engine must become a shared library.
+# Tools
+CC     = gcc
 
-include config.mk
-include mk/host.mk
+# Output directories
+BUILD_DIR  = build
+BIN_DIR    = bin
+PLUGIN_DIR = plugins # output .so files from modules are called plugins.
 
-.PHONY: all clean
+# Output files
+HOST_TARGET = $(BIN_DIR)/mouse_engine
 
-all: \
-	$(HOST_TARGET)
+# Compiler flags
+CFLAGS  = -Wall -Wextra -g -Iinclude
 
-clean:
-	rm -rf $(BUILD_DIR)
-	rm -rf $(BIN_DIR)
-	rm -rf $(PLUGIN_DIR)
+# Position Independent Code
+PICFLAGS = -fPIC
+
+# Linker options
+LDFLAGS =
+
+HOST_LIBS = -ldl
+
+PLUGIN_LDFLAGS = -shared

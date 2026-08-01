@@ -18,7 +18,7 @@
 #ifndef MOUSE_WINDOW
 #define MOUSE_WINDOW
 
-#include "platform.h"
+#include <stdint.h>
 #include "mouse_error.h"
 
 typedef struct

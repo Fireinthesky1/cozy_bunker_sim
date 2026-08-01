@@ -11,6 +11,6 @@ typedef enum
     MOUSE_ERROR_AUDIO,
     MOUSE_ERROR_LOGIC,
     MOUSE_ERROR_ENTITY,
-  } mouse_error_code;
+  } mouse_error_t;
 
 #endif

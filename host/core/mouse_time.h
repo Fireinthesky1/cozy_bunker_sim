@@ -4,7 +4,6 @@
 #ifndef MOUSE_TIME
 #define MOUSE_TIME
 
-#include <SDL.h>
 #include <stdint.h>
 #include <time.h>
 

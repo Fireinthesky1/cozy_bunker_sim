@@ -1,4 +1,4 @@
-#include "../include/mouse_time.h"
+#include "mouse_time.h"
 
 // TODO: Test this function
 mouse_time_t mouse_get_time(mouse_time_sel_t unit_select)
@@ -10,7 +10,7 @@ mouse_time_t mouse_get_time(mouse_time_sel_t unit_select)
   // get the time from the system
   if(clock_gettime(CLOCK_MONOTONIC_RAW, &tp))
     {
-      SDL_Log("mouse_get_time()::Failed to get time\n");
+      // TODO: Add logging here or return a mouse_error_t
     }
 
   switch(unit_select)
