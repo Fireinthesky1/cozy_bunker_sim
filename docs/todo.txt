@@ -1,37 +1,23 @@
 TODO:
-[ ] Remove all SDL windowing code
-[ ] Create windowing docs
+[x] Remove all SDL windowing code
+[x] Create windowing docs
 [ ] Create windowing code
 [ ] Open a window on linux
 [ ] Make the window reseable
 [ ] Render everything using the processor
 [ ] implement and test the component module
   [ ] update locaation system
-
-[ ] get the character moving around the screen
-[ ] consider rearchitecture so everything is done with 'state machines'
-[ ] implement debug macros (WDIM?)
-[ ] ensure cross compatability for mouse_time
-[ ] enforce target fps and develop game loop
-[ ] clean up the game loop
-[ ] place all delcarations at the top of the function codebase wide
-[ ] fix ' collect2: error: ld returned 1 exit status '
-[ ] Move the character using joystick
-[ ] figure out order of operations for cleanup
-[ ] figure out what to do with the functions that utelize SDL
 [ ] implement a logger
 
+[ ] get the character moving around the screen
+[ ] enforce target fps and develop game loop
+[ ] place all declarations at the top of the function codebase wide
+
 BUGS:
-[ ] resizable window glitching
 
 NOTES:
- - I want the game engine as decoupled as possible from SDL. This way I
-   can reuse the engine for later projects and not have to rewrite the engine
-
  - We will use a polling implementation and poll inputs at the beggining of each game loop
    cycle
-
  - How will we retrieve inputs?
-   - SDL
  - How will we process inputs?
    - event sytem ( I want to run this game single threaded )

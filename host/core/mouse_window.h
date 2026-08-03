@@ -1,5 +1,5 @@
 //  Mouse Windowing System Header.
-//  This file declares types and prototypes for the Mouse Windowing System.
+//  This file provides the public windowing API used by the engine.
 //  Copyright (C) <2026>  <James Hicks>
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -26,37 +26,34 @@ typedef struct
   uint16_t window_height;
   uint16_t window_width;
   uint16_t border_width;
-} mouse_window_stats_t;
+} mouse_window_params_t;
 
 /*
-The below struct is the Mouse Engine Window interface.
-platform_window_init:        Initializes the platform dependent windowing system
-platform_window_shutdown:    Shuts down the platform dependent windowing system
-platform_window_create:      Creates a platform dependent window
-platform_window_destroy:     Destroys a platform dependent window
-platform_window_poll_events: Polls events on the platform dependent window
-platform_swap_buffers:       Swapts the platform dependent windows
+pal_window_init:        Initializes the platform dependent windowing system
+pal_window_shutdown:    Shuts down the platform dependent windowing system
+pal_window_create:      Creates a platform dependent window
+pal_window_destroy:     Destroys a platform dependent window
+pal_window_poll_events: Polls events on the platform dependent window
+pal_swap_buffers:       Swaps the platform dependent windows
 */
 typedef struct
 {
-  mouse_error_t (*platform_window_init)(void);
-  mouse_error_t (*platform_window_shutdown)(void);
-  mouse_error_t (*platform_window_create)(void);
-  mouse_error_t (*platform_window_destroy)(void);
-  mouse_error_t (*platform_window_poll_events)(void);
-  mouse_error_t (*platform_window_swap_buffers)(void);
-} mouse_window_t;
-
-/* Mouse Windowing System variables */
-extern mouse_window_t * window;
+  mouse_error_t (*init)(void);
+  mouse_error_t (*shutdown)(void);
+  mouse_error_t (*create)(void);
+  mouse_error_t (*destroy)(void);
+  mouse_error_t (*display)(void);
+  mouse_error_t (*poll_events)(void);
+  mouse_error_t (*swap_buffers)(void);
+} mouse_window_api_t;
 
 /* Mouse Windowing System functions */
-extern mouse_error_t mouse_window_init(void);
-extern mouse_error_t mouse_window_shutdown(void);
-extern mouse_error_t mouse_window_create(void);
-extern mouse_error_t mouse_window_destroy(void);
-extern mouse_error_t mouse_window_display(void);
-extern mouse_error_t mouse_window_poll_events(void);
-extern mouse_error_t mouse_window_swap_buffers(void);
+mouse_error_t mouse_window_init(void);
+mouse_error_t mouse_window_shutdown(void);
+mouse_error_t mouse_window_create(void);
+mouse_error_t mouse_window_destroy(void);
+mouse_error_t mouse_window_display(void);
+mouse_error_t mouse_window_poll_events(void);
+mouse_error_t mouse_window_swap_buffers(void);
 
 #endif

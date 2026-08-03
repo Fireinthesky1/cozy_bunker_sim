@@ -1,5 +1,5 @@
 //  Linux Windowing.
-//    This header is responsible for all X Windowing System Specific code.
+//  This header is responsible for all X Windowing System Specific code.
 //  Copyright (C) <2026>  <James Hicks>
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -15,49 +15,70 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include "linux_platform.h"
+#include <stdio.h> // TODO: Implement Mouse Logger and remoce
 
-void linux_create_window(mouse_window_t * m_window)
+#include "linux_window.h"
+
+mouse_error_t pal_window_init(void)
+{
+  return MOUSE_ERROR_NONE;
+}
+
+mouse_error_t pal_window_shutdown(void)
+{
+  return MOUSE_ERROR_NONE;
+}
+
+mouse_error_t pal_window_create(void)
 {
   Display * d;
-  Window * w;
+  Window w;
 
-  //NOTE: NULL defaults display name to the DISPLAY environment variable.
+  // NOTE: NULL defaults display name to the DISPLAY environment variable.
+  // TODO(HICKS): Make it so this function call doesn't have hardcoded values
+  // Open a connection to the X Window Server
   d = XOpenDisplay(NULL);
-  w = XCreateWindow(d, DefaultRootWindow(display),
+  if(d == NULL)
+  {
+    printf("FAILED TO OPEN DISPLAY\n");
+  }
+
+  // Create a window
+  w = XCreateSimpleWindow(d, DefaultRootWindow(d),
                     0, 0,
-                    m_window.window_width,
-                    m_window.window_height,
-                    m_window.border_width,
-                    CopyFromParent,
-                    InputOutput,
-                    CopyFromParent,
-                    0,
-                    NULL);
+                    800,
+                    600,
+                    10,
+                    100,
+                    255);
+
   // Clear the window.
 
-
-
   // Map the window
-  XMapWindow(d, &w);
+  XMapWindow(d, w);
+
+  // flush
+  XFlush(d);
+
+  return MOUSE_ERROR_NONE;
 }
 
-void linux_destroy_window(void)
+mouse_error_t pal_window_destroy(void)
 {
-
+  return MOUSE_ERROR_NONE;
 }
 
-void linux_display_window(void)
+mouse_error_t pal_window_display(void)
 {
-
+  return MOUSE_ERROR_NONE;
 }
 
-void linux_poll_events(void)
+mouse_error_t pal_window_poll_events(void)
 {
-
+  return MOUSE_ERROR_NONE;
 }
 
-void linux_swap_buffers(void)
+mouse_error_t pal_window_swap_buffers(void)
 {
-
+  return MOUSE_ERROR_NONE;
 }

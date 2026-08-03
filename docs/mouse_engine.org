@@ -15,10 +15,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 * Glossary
-Host:          The executable responsible for bootstrapping and managing the runtime.
-Module:        A dynamically loaded shared library that provides functionality.
-Engine Module: A module that provides engine functionality (rendering, audio etc.)
-Game Module:   The module the provides the Game (i.e. Mouse Game).
+- Host:          The executable responsible for bootstrapping and managing the runtime.
+- Module:        A dynamically loaded shared library that provides functionality.
+- Engine Module: A module that provides engine functionality (rendering, audio etc.)
+- Game Module:   The module the provides the Game (i.e. Mouse Game).
 
 * Rules of the architecture
 1. Modules communicate through stable interfaces.

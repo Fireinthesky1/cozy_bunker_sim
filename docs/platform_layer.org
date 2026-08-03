@@ -13,30 +13,33 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 * platform abstraction layer (PAL) documentation
-The purpose of this system is to decouple the mouse_engine from the platform
-it's running on. This means that the mouse_engine has no concept of the the
-Linux, Mac, or Windows operating systems but simply passes it's calls to
-/this/ layer which does. The current iteration of the engine targets Linux.
-But future iterations may target Mac or Windows. We are building the infrastructure
-to be able to do.
-* platform.h
-This module will be responsible for platform detection.
-This is done by compiler
-* Windowing
+The platform abstraction layer provides a common interface between
+Mouse Engine and the operating system. Platform specific implementations
+expose a common API such that the rest of Mouse Engine remains portable.
+
+* PAL Structure
+Each platform dependent function has a platform-independent API that
+it must implement. For example, Mouse Engine contains a file called
+/mouse_window.h/. This file provides the public windowing API that
+Mouse Engine uses. This file has no concept of platform, it just specifies
+functions that each supported platform must implement.
+
+Each platform must be detected, and platform specific implementations must
+be includes. This is the job of /platform.h/. /platform.h/ detects the platform
+and includes all platform specific headers.
+
+Each platform must implement the API
+
+* Supported platforms
+** Linux
+** Mac (planned)
+** Windows (planned)
+
+* Windowing API
 ** Linux
 This module will be responsible for linux specific windowing calls.
-*** The X Windowing System
-**** What is the X Server?
-**** Opening A connection to X Server
-**** Displaying an X window
-**** Swapping buffer
-**** Even Polling
-**** Destroying an X window
-**** What is an InputOutput window?
-These kinds of windows are used for both displaying and for accepting inputs.
-Example of inputs are clicks on the screen etc. Because we want the use to
-be able to interact with the window, the main mouse_game window will be InputOutput.
 * Logging
 * Input
 * Memory Allocation

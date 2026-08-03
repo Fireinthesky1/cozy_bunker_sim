@@ -1,5 +1,5 @@
 //  Platform Abstraction Layer Header.
-//    This file is responsible for platform detection.
+//  This file detects platform and includes the correct platform backend.
 //  Copyright (C) <2026>  <James Hicks>
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -17,10 +17,13 @@
 #ifndef PLATFORM
 #define PLATFORM
 
-// Detect the linux platform and include the linux platform header.
 #ifdef __linux__
 #define LINUX_PLATFORM
-#include "linux_platform.h"
+
+#include "linux_window.h"
+//#include "linux_memory_management.h"
+//#include "linux_time.h"
+
 #endif
 
 #endif

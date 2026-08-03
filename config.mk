@@ -15,7 +15,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 # Tools
-CC     = gcc
+CC         = gcc
 
 # Output directories
 BUILD_DIR  = build
@@ -34,6 +34,6 @@ PICFLAGS = -fPIC
 # Linker options
 LDFLAGS =
 
-HOST_LIBS = -ldl
+HOST_LIBS = -ldl -lX11
 
 PLUGIN_LDFLAGS = -shared

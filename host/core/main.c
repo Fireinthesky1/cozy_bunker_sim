@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> // TODO: Implement Mouse Logger and remove.
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -7,8 +7,6 @@
 #include "mouse_time.h"
 
 bool game_running = false;
-
-mouse_window_t * window;    // The window for the entire game
 
 // fully global
 uint32_t num_entities = 0;
@@ -22,8 +20,18 @@ mouse_error_t init(void)
   result = MOUSE_ERROR_NONE;
 
   // initialize mouse_host
+  result = mouse_window_init();
+  if(result != MOUSE_ERROR_NONE)
+  {
+    // TODO(HICKS): Log fatal error. Replace function call with logging macro.
+  }
 
   // create window
+  result = mouse_window_create();
+  if(result != MOUSE_ERROR_NONE)
+  {
+    // TODO(HICKS): Log fatal error. Replace function call with logging macro.
+  }
 
   // create renderer
 
@@ -36,19 +44,27 @@ mouse_error_t init(void)
 int main(void)
 {
 
-  mouse_time_t prev_mouse_time;
-  mouse_time_t cur_mouse_time;
-  mouse_time_t elapsed_mouse_time;
-  mouse_time_t lag;
+  mouse_time_t  prev_mouse_time;
+  mouse_time_t  cur_mouse_time;
+  mouse_time_t  elapsed_mouse_time;
+  mouse_time_t  lag;
+  mouse_error_t result;
 
-  if(init() == MOUSE_ERROR_NONE)
+  result = init();
+  if(result == MOUSE_ERROR_NONE)
     {
+      printf("INTIALIZATION COMPLETE");
       game_running = true;
     }
 
   // Start a new frame with a black screen
 
-  // show the window
+  // display the window
+  result = mouse_window_display();
+  if(result != MOUSE_ERROR_NONE)
+  {
+    // TODO(HICKS): Log fatal error. Replace function call with logging macro.
+  }
 
   // game loop
   // 0 check the dela time

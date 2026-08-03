@@ -24,10 +24,8 @@ HOST_CORE_SRCS = \
 	$(CORE_DIR)/mouse_time.c \
 	$(CORE_DIR)/mouse_window.c
 
-# HOST_PLATFORM_SRCS = \
-# 	$(CORE_DIR)/platform.c \
-# 	$(CORE_DIR)/linux_platform.c \
-# 	$(CORE_DIR)/linux_window.c
+HOST_PLATFORM_SRCS = \
+	$(PLATFORM_DIR)/linux_window.c
 
 HOST_SRCS = \
 	$(HOST_CORE_SRCS) \
