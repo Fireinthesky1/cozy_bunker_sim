@@ -33,7 +33,6 @@ mouse_error_t mouse_window_init(void)
   mouse_window_api.create       = pal_window_create;
   mouse_window_api.destroy      = pal_window_destroy;
   mouse_window_api.display      = pal_window_display;
-  mouse_window_api.poll_events  = pal_window_poll_events;
   mouse_window_api.swap_buffers = pal_window_swap_buffers;
 
   // Call the platform init function.
@@ -71,14 +70,6 @@ mouse_error_t mouse_window_display(void)
   mouse_error_t return_code;
   return_code = MOUSE_ERROR_NONE;
   return_code = mouse_window_api.display();
-  return return_code;
-}
-
-mouse_error_t mouse_window_poll_events(void)
-{
-  mouse_error_t return_code;
-  return_code = MOUSE_ERROR_NONE;
-  return_code = mouse_window_api.poll_events();
   return return_code;
 }
 

@@ -15,20 +15,20 @@ uint32_t num_entities = 0;
 mouse_error_t init(void)
 {
 
-  mouse_error_t result;
+  mouse_error_t return_code;
 
-  result = MOUSE_ERROR_NONE;
+  return_code = MOUSE_ERROR_NONE;
 
   // initialize mouse_host
-  result = mouse_window_init();
-  if(result != MOUSE_ERROR_NONE)
+  return_code = mouse_window_init();
+  if(return_code != MOUSE_ERROR_NONE)
   {
     // TODO(HICKS): Log fatal error. Replace function call with logging macro.
   }
 
   // create window
-  result = mouse_window_create();
-  if(result != MOUSE_ERROR_NONE)
+  return_code = mouse_window_create();
+  if(return_code != MOUSE_ERROR_NONE)
   {
     // TODO(HICKS): Log fatal error. Replace function call with logging macro.
   }
@@ -37,7 +37,7 @@ mouse_error_t init(void)
 
   // load the sprite sheet into memory
 
-  return result;
+  return return_code;
 
 }
 
@@ -48,10 +48,10 @@ int main(void)
   mouse_time_t  cur_mouse_time;
   mouse_time_t  elapsed_mouse_time;
   mouse_time_t  lag;
-  mouse_error_t result;
+  mouse_error_t return_code;
 
-  result = init();
-  if(result == MOUSE_ERROR_NONE)
+  return_code = init();
+  if(return_code == MOUSE_ERROR_NONE)
     {
       printf("INTIALIZATION COMPLETE");
       game_running = true;
@@ -60,8 +60,8 @@ int main(void)
   // Start a new frame with a black screen
 
   // display the window
-  result = mouse_window_display();
-  if(result != MOUSE_ERROR_NONE)
+  return_code = mouse_window_display();
+  if(return_code != MOUSE_ERROR_NONE)
   {
     // TODO(HICKS): Log fatal error. Replace function call with logging macro.
   }
@@ -91,8 +91,8 @@ int main(void)
     }
 
   // cleanup
+  return_code = mouse_window_shutdown(); // Shut down Mouse Window System
 
   // return 0 for on success
-  return 0;
-
+  return return_code;
 }

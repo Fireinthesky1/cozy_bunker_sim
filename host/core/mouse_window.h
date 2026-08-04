@@ -43,7 +43,6 @@ typedef struct
   mouse_error_t (*create)(void);
   mouse_error_t (*destroy)(void);
   mouse_error_t (*display)(void);
-  mouse_error_t (*poll_events)(void);
   mouse_error_t (*swap_buffers)(void);
 } mouse_window_api_t;
 
@@ -53,7 +52,6 @@ mouse_error_t mouse_window_shutdown(void);
 mouse_error_t mouse_window_create(void);
 mouse_error_t mouse_window_destroy(void);
 mouse_error_t mouse_window_display(void);
-mouse_error_t mouse_window_poll_events(void);
 mouse_error_t mouse_window_swap_buffers(void);
 
 #endif

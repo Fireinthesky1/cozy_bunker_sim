@@ -15,24 +15,24 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include <stdio.h> // TODO: Implement Mouse Logger and remoce
+#include <stdio.h> // TODO: Implement Mouse Logger and remove
 
 #include "linux_window.h"
 
+// TODO: We obviously shouldn't do it this way.
+#define WINDOW_WIDTH  800
+#define WINDOW_HEIGHT 600
+
+static Display *d;
+static Window   w;
+static GC       gc;
+static Pixmap   back_buffer;
+
 mouse_error_t pal_window_init(void)
 {
-  return MOUSE_ERROR_NONE;
-}
+  mouse_error_t return_code;
 
-mouse_error_t pal_window_shutdown(void)
-{
-  return MOUSE_ERROR_NONE;
-}
-
-mouse_error_t pal_window_create(void)
-{
-  Display * d;
-  Window w;
+  return_code = MOUSE_ERROR_NONE;
 
   // NOTE: NULL defaults display name to the DISPLAY environment variable.
   // TODO(HICKS): Make it so this function call doesn't have hardcoded values
@@ -40,26 +40,53 @@ mouse_error_t pal_window_create(void)
   d = XOpenDisplay(NULL);
   if(d == NULL)
   {
-    printf("FAILED TO OPEN DISPLAY\n");
+    return_code = MOUSE_ERROR_PLATFORM_WINDOW_INITIALIZATION;
+    printf("FAILED TO OPEN DISPLAY\n"); // TODO: Implement logger and remove
   }
 
   // Create a window
   w = XCreateSimpleWindow(d, DefaultRootWindow(d),
-                    0, 0,
-                    800,
-                    600,
-                    10,
-                    100,
-                    255);
+                          0, 0,
+                          WINDOW_WIDTH,
+                          WINDOW_HEIGHT,
+                          10,
+                          100,
+                          255);
 
-  // Clear the window.
+  // Create a graphics context (valuemask set to zero. No values selected)
+  gc = XCreateGC(d, w, 0, NULL);
 
-  // Map the window
-  XMapWindow(d, w);
+  // Create the back buffer
+  back_buffer = XCreatePixmap(d, w,
+                              WINDOW_WIDTH, WINDOW_HEIGHT,
+                              DefaultDepth(d, 0));
 
-  // flush
-  XFlush(d);
+  return return_code;
+}
 
+mouse_error_t pal_window_shutdown(void)
+{
+  mouse_error_t return_code;
+
+  return_code = MOUSE_ERROR_NONE;
+
+  // Free the back buffer
+  XFreePixmap(d, back_buffer);
+
+  // Free the graphics context
+  XFreeGC(d, gc);
+
+  // Destroy the window
+  XDestroyWindow(d, w);
+
+  // Close the connection to the X Window Server
+  XCloseDisplay(d);
+
+  return return_code;
+}
+
+mouse_error_t pal_window_create(void)
+{
   return MOUSE_ERROR_NONE;
 }
 
@@ -70,12 +97,17 @@ mouse_error_t pal_window_destroy(void)
 
 mouse_error_t pal_window_display(void)
 {
-  return MOUSE_ERROR_NONE;
-}
+  mouse_error_t return_code;
 
-mouse_error_t pal_window_poll_events(void)
-{
-  return MOUSE_ERROR_NONE;
+  return_code = MOUSE_ERROR_NONE;
+
+  // Map the window
+  XMapWindow(d, w);
+
+  // flush
+  XFlush(d);
+
+  return return_code;
 }
 
 mouse_error_t pal_window_swap_buffers(void)

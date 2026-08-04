@@ -16,6 +16,7 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <X11/Xlib.h>
+#include <X11/extensions/Xdbe.h> // Double buffer Extension
 #include "../core/mouse_error.h"
 
 /* Linux Specific PAL Windowing System functions */
@@ -24,5 +25,4 @@ mouse_error_t pal_window_shutdown(void);
 mouse_error_t pal_window_create(void);
 mouse_error_t pal_window_destroy(void);
 mouse_error_t pal_window_display(void);
-mouse_error_t pal_window_poll_events(void);
 mouse_error_t pal_window_swap_buffers(void);
