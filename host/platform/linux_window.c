@@ -23,10 +23,12 @@
 #define WINDOW_WIDTH  800
 #define WINDOW_HEIGHT 600
 
-static Display *d;
-static Window   w;
-static GC       gc;
-static Pixmap   back_buffer;
+// State that the X Window System needs to keep around.
+static Display       *d;
+static Window         w;
+static GC             gc;
+static XdbeBackBuffer back_buffer;
+static XdbeSwapInfo   swap_info;
 
 mouse_error_t pal_window_init(void)
 {
@@ -57,9 +59,11 @@ mouse_error_t pal_window_init(void)
   gc = XCreateGC(d, w, 0, NULL);
 
   // Create the back buffer
-  back_buffer = XCreatePixmap(d, w,
-                              WINDOW_WIDTH, WINDOW_HEIGHT,
-                              DefaultDepth(d, 0));
+  back_buffer = XdbeAllocateBackBufferName(d, w, XdbeUndefined);
+
+  // Initialize the swap info buffer
+  swap_info.swap_window = w;
+  swap_info.swap_action = XdbeUndefined;
 
   return return_code;
 }
@@ -67,11 +71,16 @@ mouse_error_t pal_window_init(void)
 mouse_error_t pal_window_shutdown(void)
 {
   mouse_error_t return_code;
+  Status        x_window_status;
 
   return_code = MOUSE_ERROR_NONE;
 
   // Free the back buffer
-  XFreePixmap(d, back_buffer);
+  x_window_status = XdbeDeallocateBackBufferName(d, back_buffer);
+  if(x_window_status == 0)
+  {
+    return_code = MOUSE_ERROR_PLATFORM_WINDOW_SHUTDOWN;
+  }
 
   // Free the graphics context
   XFreeGC(d, gc);
@@ -112,5 +121,17 @@ mouse_error_t pal_window_display(void)
 
 mouse_error_t pal_window_swap_buffers(void)
 {
-  return MOUSE_ERROR_NONE;
+  mouse_error_t return_code;
+  Status        x_window_status;
+
+  return_code = MOUSE_ERROR_NONE;
+
+  x_window_status = XdbeSwapBuffers(d, &swap_info, 1);
+
+  if(x_window_status == 0)
+  {
+    return_code = MOUSE_ERROR_PLATFORM_WINDOW_SWAP_BUFFERS;
+  }
+
+  return return_code;
 }

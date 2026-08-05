@@ -34,6 +34,9 @@ PICFLAGS = -fPIC
 # Linker options
 LDFLAGS =
 
-HOST_LIBS = -ldl -lX11
+# Dynamic Linking Library
+# X11 core
+# X Window System extensions
+HOST_LIBS = -ldl -lX11 -lXext
 
 PLUGIN_LDFLAGS = -shared

@@ -15,8 +15,8 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#include <X11/Xlib.h>
-#include <X11/extensions/Xdbe.h> // Double buffer Extension
+#include <X11/Xlib.h>            // core
+#include <X11/extensions/Xdbe.h> // double buffer extension
 #include "../core/mouse_error.h"
 
 /* Linux Specific PAL Windowing System functions */
